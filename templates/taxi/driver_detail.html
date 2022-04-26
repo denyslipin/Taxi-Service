@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Username: {{ driver.username }}
+  </h1>
+
+  <p><strong>First name:</strong> {{ driver.first_name }}</p>
+  <p><strong>Last name:</strong> {{ driver.last_name }}</p>
+  <p>
+    <strong>License number:</strong> {{ driver.license_number }}
+    <a href="{% url "taxi:license-update" pk=driver.id %}" class="btn btn-info">
+      Update
+    </a>
+  </p>
+  <p><strong>Is staff:</strong> {{ driver.is_staff }}</p>
+
+  <div class="ml-4">
+    <h3>Cars</h3>
+
+    {% for car in driver.cars.all %}
+        <hr>
+        <p><strong>Model:</strong>
+          <a href="{% url 'taxi:car-detail' pk=car.id %}" class="btn btn-outline-primary">
+            {{ car.model }}
+          </a>
+        </p>
+        <p><strong>Manufacturer:</strong> {{ car.manufacturer.name }}</p>
+        <p class="text-muted"><strong>Id:</strong> {{car.id}}</p>
+
+    {% empty %}
+      <p>No cars!</p>
+    {% endfor %}
+  </div>
+  <form action="{% url "taxi:driver-update" pk=driver.id %}">
+    {% csrf_token %}
+    <input type="submit" value="Update Driver" class="btn btn-primary floated"/>
+  </form>
+  <form action="{% url "taxi:driver-delete" pk=driver.id %}">
+    {% csrf_token %}
+    <input type="submit" value="Delete Driver" class="btn btn-primary floated"/>
+  </form>
+{% endblock %}

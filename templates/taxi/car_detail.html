@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Car model: {{ car.model }}</h1>
+  <p><strong>Manufacturer:</strong> {{ car.manufacturer.name }}</p>
+  <p><strong>Country:</strong> {{ car.manufacturer.country }}</p>
+  <div class="ml-4">
+    <h2>Drivers</h2>
+    {% for driver in car.drivers.all %}
+        <hr>
+        <p><strong>Username:</strong>
+          <a href="{% url 'taxi:driver-detail' pk=driver.id %}" class="btn btn-outline-primary">
+            {{ driver.username }}
+          </a>
+        </p>
+        <p><strong>Full name:</strong> {{ driver.first_name }} {{ driver.last_name }}</p>
+        <p class="text-muted"><strong>Id:</strong> {{driver.id}}</p>
+    {% empty %}
+      <p>No drivers!</p>
+    {% endfor %}
+  </div>
+  <form action="{% url "taxi:car-update" pk=car.id %}">
+    {% csrf_token %}
+    <input type="submit" value="Update Car" class="btn btn-primary floated"/>
+  </form>
+  <form action="{% url "taxi:car-delete" pk=car.id %}">
+    {% csrf_token %}
+    <input type="submit" value="Delete Car" class="btn btn-primary floated"/>
+  </form>
+{% endblock %}
