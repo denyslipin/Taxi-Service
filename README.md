@@ -12,10 +12,10 @@ Python3 must be already installed
 
 ```shell
 git clone https://github.com/denyslipin/Taxi-Service
-cd Taxi-Service
 python3 -m venv venv
 source venv/bin/activate - on macOS (venv\Scripts\activate - on Windows)
 pip install -r requirements.txt
+python3 manage.py migrate
 python3 manage.py runserver
 ```
 

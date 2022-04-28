@@ -70,7 +70,7 @@ class CarListView(LoginRequiredMixin, generic.ListView):
         form = CarSearchForm(self.request.GET)
         if form.is_valid():
             return self.queryset.filter(
-                model__startswith=form.cleaned_data["model"]
+                model__istartswith=form.cleaned_data["model"]
             )
         return self.queryset
 

@@ -80,11 +80,11 @@ class PrivateCarListViewTests(TestCase):
         self.assertTrue(len(response.context["car_list"]) == 3)
 
     def test_search_form(self):
-        response1 = self.client.get(CAR_LIST_VIEW_URL + "?model=Mo")
-        cars1 = Car.objects.filter(model__startswith="Mo")
+        response1 = self.client.get(CAR_LIST_VIEW_URL + "?model=MO")
+        cars1 = Car.objects.filter(model__istartswith="mo")
 
-        response2 = self.client.get(CAR_LIST_VIEW_URL + "?model=Na")
-        cars2 = Car.objects.filter(model__startswith="Na")
+        response2 = self.client.get(CAR_LIST_VIEW_URL + "?model=na")
+        cars2 = Car.objects.filter(model__istartswith="NA")
 
         self.assertEqual(list(response1.context["car_list"]), list(cars1))
         self.assertEqual(list(response2.context["car_list"]), list(cars2))
