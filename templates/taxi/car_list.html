@@ -20,6 +20,7 @@
         <th>Model</th>
         <th>Manufacturer</th>
         <th>Country</th>
+        <th>Drivers</th>
       </tr>
       {% for car in car_list %}
         <tr>
@@ -31,6 +32,7 @@
           </td>
           <td>{{ car.manufacturer.name }}</td>
           <td>{{ car.manufacturer.country }}</td>
+          <td>{{ car.drivers.count }}</td>
         </tr>
       {% endfor %}
     </table>

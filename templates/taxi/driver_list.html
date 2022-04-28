@@ -15,6 +15,7 @@
       <th>First name</th>
       <th>Last name</th>
       <th>License number</th>
+      <th>Cars</th>
       <th>Is staff</th>
     </tr>
   {% for driver in driver_list %}
@@ -28,7 +29,8 @@
       <td>{{ driver.first_name }}</td>
       <td>{{ driver.last_name }}</td>
       <td>{{ driver.license_number }}</td>
-      <td>{{ driver.is_staff }}</td>
+      <td>{{ driver.cars.count }}</td>
+      <td>{% if driver.is_staff %}YES{% else %}NO{% endif %}</td>
     </tr>
   {% endfor %}
 
